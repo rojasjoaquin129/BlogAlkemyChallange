@@ -1,0 +1,149 @@
+<!-- Plan B
+<main class="container">
+  <div class="row g-5 mt-4">
+    <div class="col-md-8">
+      <h3 class="pb-4 mb-4 fst-italic border-bottom">
+        Lista De Posteos
+      </h3>
+
+        <article class="blog-post">
+          <h2 class="blog-post-title">Sample blog post</h2>
+          <p class="blog-post-meta">January 1, 2021 by <a href="#">Mark</a></p>
+          <p>This blog post shows a few different types of content that’s supported and styled with Bootstrap. Basic typography, lists, tables, images, code, and more are all supported as expected.</p>
+            <hr>
+        </article>
+      </div>
+        <div class="col-md-4">
+          <div class="position-sticky" style="top:2rem;" >
+            <div class="p-4 mb-3 bg-light rounded">
+              <h4 class="fst-italic">About</h4>
+              <p class="mb-0">Customize this section to tell your visitors a little bit about your publication, writers, content, or something else entirely. Totally up to you.</p>
+            </div>
+          </div>
+
+        </div>
+
+    </div>
+  </main>
+-->
+
+  <!-- Page content-->
+  <div class="container mt-5 animate__animated animate__fadeIn ">
+    <div class="row">
+      <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark animate__animated animate__fadeIn">
+        <div class="col-md-7 px-0">
+          <h1 class="display-5 fst-italic">{{tittle}}</h1>
+          <p class="lead my-3">Puede Ver los Comentarios de cada posts y los datos del usuario </p>
+
+        </div>
+      </div>
+        <div class="col-lg-8">
+            <!-- Post content-->
+                <!-- Post header-->
+
+                <div *ngIf="listPosts.length === 0">
+                  <app-empty-card [text]="('No Se encontro ningun Post')"></app-empty-card>
+                </div>
+               <div >
+                  <!-- Post content-->
+                <section class="mb-5"  *ngFor="let post of listPosts">
+                  <hr>
+                    <h2 class="fw-bolder mb-2 mt-3">{{post.title}}</h2>
+                    <div class="text-muted fst-italic mb-2">Post N° {{post.id}}</div>
+                    <p class="fs-5 mb-3">{{post.body}}</p>
+                    <div class="card-footer" *ngIf="!showComments" >
+                        <a style="cursor: pointer;" (click)="viewComment(post)" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                        <a style="cursor: pointer;"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal"
+                         (click)="viewUser(post.userId)"
+                        class="card-link"><i class="fas fa-user"></i> User</a>
+                    </div>
+                    <div class="card-footer" *ngIf="showComments && !verificacion(post)" >
+                      <a style="cursor: pointer;" (click)="viewComment(post)" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                      <a style="cursor: pointer;"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                       (click)="viewUser(post.userId)"
+                       class="card-link"><i class="fas fa-user"></i> User</a>
+                  </div>
+                     <!-- Comments section-->
+                      <section class="mb-3" *ngIf="showComments && verificacion(post)">
+                      <div class="card bg-light">
+                        <div class="card-header d-flex justify-content-between ">
+                          <h5 class="card-title">Comentarios</h5>
+                          <button type="button" class="btn-close " (click)="showComments=!showComments" aria-label="Close"></button>
+                        </div>
+                          <div class="card-body">
+                              <!-- Single comment-->
+                              <div class="d-flex mb-3" *ngFor="let comment of listComments">
+                                <div class="flex-shrink-0 "><img class="rounded-circle bg-success" width="50"  height="50"  [src]="generateImage(comment.id)" alt="..." /></div>
+                                  <div class="ms-3">
+                                    <div class="text-muted fst-italic mb-2">{{comment?.email}}</div>
+                                      <div class="fw-bold">{{comment?.name}}</div>
+                                      {{comment?.body}}
+                                  </div>
+
+                              </div>
+                          </div>
+
+                      </div>
+
+                      </section>
+                </section>
+
+
+               </div>
+        </div>
+        <!-- Side widgets-->
+        <div class="col-lg-4">
+            <!-- Search widget-->
+            <div class="card mb-4">
+                <div class="card-header text-white bg-primary">Buscador</div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <input
+                        class="form-control"
+                         type="text"
+                         placeholder="Buscar Posts"
+                         [(ngModel)]="busqueda"
+                          (keyup)="filtrarLista()"
+                        />
+
+                        <button class="btn btn-primary" id="button-search" type="button"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal"  role="dialog" aria-hidden="true" tabindex="-1" >
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header text center">
+        <h4 class="modal-title-center  text-center" style="color: black;" id="exampleModalLabel">{{userSelec?.username}}</h4>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body ">
+        <p class="fs-3" > <b>Datos del Usuario:</b></p>
+        <div class="row g-3 " >
+          <p class="fs-5 col-md-6 "><b>Nombre :</b> {{userSelec?.username}}  </p>
+          <p class="fs-5 col-md-6 .ml-auto"><b>Apellido :</b> {{userSelec?.name}}  </p>
+        </div>
+        <p class="fs-5"><b>Sito Web:</b>  {{userSelec?.website}}</p>
+        <p class="fs-3" > <b>Datos de Su Compañia:</b> </p>
+        <p class="fs-5" ><b> Nompre :</b> {{userSelec?.company?.name}}</p>
+        <p class="fs-5"> <b>Eslogan :</b> {{userSelec?.company?.catchPhrase}} </p>
+        <p class="fs-5"> <b>Descripcion :</b> {{userSelec?.company?.bs}} </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info"  data-bs-dismiss="modal" >Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

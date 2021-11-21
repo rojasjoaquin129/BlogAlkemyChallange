@@ -1,0 +1,57 @@
+
+ <!--Lista de Usuarios -->
+
+  <div *ngIf="showList">
+    <app-navbar ></app-navbar>
+    <app-users
+    (todosUser)="allSelected($event)"
+    (PostsUser)="postSelected($event)"
+    (albumsUser)="albumsSelected($event)"
+    ></app-users>
+  </div>
+
+
+  <!-- navbar-->
+  <div *ngIf="!showList">
+    <app-navbar
+    [user]="userSelec"
+    (mostrar)="show($event)"
+    ></app-navbar>
+
+  </div>
+
+  <!-- Lista de Albumes del usuario -->
+
+  <div *ngIf="showListAlbum">
+
+    <app-albums
+    [idUser]="userSelec.id"
+    [userName]="userSelec.username"
+    (album)="albumToShow($event)"
+    ></app-albums>
+  </div>
+
+  <!-- Listado de Images del album Seleccionado -->
+
+  <div *ngIf="showListImages">
+
+    <app-images
+      [selecAlbum]="albumSelec"
+    ></app-images>
+
+  </div>
+
+  <!-- Listado de Post y sus respectivos comentarios -->
+    <div *ngIf="showListPost">
+      <app-posts
+      [idUser]="userSelec.id"
+      ></app-posts>
+    </div>
+
+  <!-- Listado de Todos -->
+
+    <div *ngIf="showListTodos">
+      <app-todos
+      [idUser]="userSelec.id"
+      ></app-todos>
+    </div>

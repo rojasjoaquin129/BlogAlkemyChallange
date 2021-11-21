@@ -1,0 +1,17 @@
+<app-navbar></app-navbar>
+<div *ngIf="showListAlbum">
+
+  <app-albums
+  (album)="albumToShow($event)"
+  ></app-albums>
+</div>
+
+
+<div *ngIf="showListImages">
+
+  <app-images
+    [selecAlbum]="albumSelec"
+  ></app-images>
+
+</div>
+

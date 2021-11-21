@@ -1,0 +1,52 @@
+<div class="container px-4 py-5 animate__animated animate__fadeIn ">
+  <h1 class="pb-2 border-bottom">Listado De Usuarios</h1>
+  <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    <div class=" col d-flex align-items-start" *ngFor="let user of listUsers, let i=index ">
+      <div
+      class="card text-white bg-primary cardcorrecciones"
+      (click)="selectUser(user)"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      style="width: 18rem;"
+      >
+        <img  class="card-img-top" [src]="avatarRandom(user.id)" alt="avatar">
+        <div class="card-body text-center">
+          <h4 class="card-title "><b>{{user.username}}</b></h4>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+ <!-- Modal -->
+ <div class="modal fade" id="exampleModal"  role="dialog" aria-hidden="true" tabindex="-1" >
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header text center">
+        <h4 class="modal-title-center  text-center" style="color: black;" id="exampleModalLabel">{{userSelec?.username}}</h4>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body ">
+        <p class="fs-3" > <b>Datos del Usuario:</b></p>
+        <div class="row g-3 " >
+          <p class="fs-5 col-md-6 "><b>Nombre :</b> {{userSelec?.username}}  </p>
+          <p class="fs-5 col-md-6 .ml-auto"><b>Apellido :</b> {{userSelec?.name}}  </p>
+        </div>
+        <p class="fs-5"><b>Sito Web:</b>  {{userSelec?.website}}</p>
+        <p class="fs-3" > <b>Datos de Su Compañia:</b> </p>
+        <p class="fs-5" ><b> Nompre :</b> {{userSelec?.company?.name}}</p>
+        <p class="fs-5"> <b>Eslogan :</b> {{userSelec?.company?.catchPhrase}} </p>
+        <p class="fs-5"> <b>Descripcion :</b> {{userSelec?.company?.bs}} </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info"  data-bs-dismiss="modal" (click)="goUser('post')">Ver Sus Posteos</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="goUser('album')">Ver Sus Álbumes</button>
+        <button type="button" class="btn btn-warning"  data-bs-dismiss="modal"(click)="goUser('todos')">Ver Todos</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<main class="container animate__animated animate__fadeIn ">
+  <div class="p-4 p-md-5 mt-4 mb-3 text-white rounded bg-dark animate__animated animate__fadeIn">
+    <div class="col-md-7 px-0">
+      <h1 class="display-4 fst-italic">{{tittle}}</h1>
+      <p class="lead my-3">Puede Ver el id del usuario de cada todos y cambiar el estado </p>
+
+    </div>
+  </div>
+  <div class="row">
+    <div  class="col-lg-8">
+      <div *ngIf="listTodos.length === 0">
+        <app-empty-card [text]="('No Se encontro ningun Todo')"></app-empty-card>
+      </div>
+      <div class="mt-5  p-5  border border-primary rounded" *ngFor="let todo of listTodos ,let i=index" >
+
+        <div class="text-muted fst-italic mb-2">Todo N° {{todo.id}}</div>
+        <h1>{{todo.title}}</h1>
+        <div *ngIf="!showData">
+          <a class="btn btn-lg btn-primary mt-3" (click)="open(todo)" role="button"><i class="fas fa-money-check"></i> Ver Info  </a>
+        </div>
+        <div *ngIf="showData && !verificacion(todo)  ">
+          <a class="btn btn-lg btn-primary mt-3" (click)="open(todo)" role="button"> <i class="fas fa-money-check"></i> Ver Info</a>
+        </div>
+        <div *ngIf="showData && verificacion(todo) ">
+          <p class="lead mt-3"><b>ID Usuario :</b> {{todo.userId}} </p>
+          <p class="mt-3 fs-2" *ngIf="todo.completed"  >Estado: <b>Completo</b></p>
+          <p class="mt-3 fs-2" *ngIf="!todo.completed"  >Estado: <b>Incompleto</b></p>
+          <a class="btn btn-lg btn-success" *ngIf="!todo.completed" (click)="setState(i)" role="button">HABILITAR ESTADO  <i class="fas fa-check"></i></a>
+          <a class="btn btn-lg btn-danger "  *ngIf="todo.completed"  (click)="setState(i)" role="button">DESHABILITAR ESTADO  <i class="fas fa-ban"></i></a>
+          <a class="btn btn-lg btn-info ml-4"  (click)="showData=!showData" role="button">Cancelar</a>
+        </div>
+      </div>
+    </div>
+
+
+   <!-- Side widgets-->
+   <div class="col-lg-4 mt-5 animate__animated animate__fadeIn">
+    <!-- Search widget-->
+    <div class="card ">
+        <div class="card-header text-white bg-primary">Buscador</div>
+        <div class="card-body">
+            <div class="input-group">
+                <input
+                class="form-control"
+                 type="text"
+                 placeholder="Buscar Todos"
+                 [(ngModel)]="busqueda"
+                  (keyup)="filtrarLista()"
+                />
+
+                <button class="btn btn-primary" id="button-search" type="button"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+    </div>
+  </div>
+</main>
+

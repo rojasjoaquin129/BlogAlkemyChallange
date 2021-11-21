@@ -1,0 +1,47 @@
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+.padre {
+  position: relative;
+  display: inline-block;
+}
+.usuarios {
+  background-image: url("../../../assets/img/image/usuarios.jpg");
+  background-image: no-repeat;
+  background-image: top;
+  background-size: cover;
+}
+
+.imagem:hover {
+  filter: blur(10px);
+}
+.texto {
+  position: absolute;
+  top: 59%;
+  left: 12%;
+}
+.textoDos {
+  color: black;
+  position: absolute;
+  top: 46%;
+  left: 6%;
+}
+
+.textoTres {
+  position: absolute;
+  top: 48%;
+  left: 4%;
+}
+.ter {
+  color: aqua;
+}

@@ -1,0 +1,69 @@
+
+<main class="animate__animated animate__fadeIn">
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class=" fs-1 fw-light">Album N°{{selecAlbum?.id}} </h1>
+        <p class=" fs-2 lead text-muted">Titulo: {{selecAlbum?.title}}</p>
+        <button (click)="showUser(selecAlbum?.userId)"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        class="btn btn-lg btn-success">Datos del usuario</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-dark">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-6 g-3">
+        <div class="col" *ngFor="let photo of listPhotos ,let i=index">
+          <div class="card  shadow-sm" style="width: 150px; ;">
+            <img class="bd-placeholder-img card-img-top" width="100%" height="150" [src]="photo?.thumbnailUrl"  focusable="false">
+
+            <div class="card-body">
+              <small class="text-muted">N°:{{photo?.id}}</small>
+              <p class="card-text"> <b> Titulo</b>  </p>
+              <p class="card-text">{{photo?.title}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button"  (click)="view(photo)" class="btn btn-sm btn-outline-primary">View</button>
+                  <button type="button" (click)="delate(i)" class="btn btn-sm btn-outline-danger">Delate</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal"  role="dialog" aria-hidden="true" tabindex="-1" >
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header text center">
+        <h4 class="modal-title-center  text-center" style="color: black;" id="exampleModalLabel">{{userSelec?.username}}</h4>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body ">
+        <p class="fs-3" > <b>Datos del Usuario:</b></p>
+        <div class="row g-3 " >
+          <p class="fs-5 col-md-6 "><b>Nombre :</b> {{userSelec?.username}}  </p>
+          <p class="fs-5 col-md-6 .ml-auto"><b>Apellido :</b> {{userSelec?.name}}  </p>
+        </div>
+        <p class="fs-5"><b>Sito Web:</b>  {{userSelec?.website}}</p>
+        <p class="fs-3" > <b>Datos de Su Compañia:</b> </p>
+        <p class="fs-5" ><b> Nompre :</b> {{userSelec?.company?.name}}</p>
+        <p class="fs-5"> <b>Eslogan :</b> {{userSelec?.company?.catchPhrase}} </p>
+        <p class="fs-5"> <b>Descripcion :</b> {{userSelec?.company?.bs}} </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info"  data-bs-dismiss="modal" >Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+

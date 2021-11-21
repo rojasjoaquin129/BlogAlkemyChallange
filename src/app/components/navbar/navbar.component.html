@@ -1,0 +1,110 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <div
+    class="
+      navbar-brand
+      p-0
+      mr-0
+      d-flex
+      justify-content-center
+      align-items-center
+      animate__animated animate__fadeIn
+    "
+    *ngIf="user"
+  >
+    <!-- Implementar custom pipe cuando no haya foto (pipe image) -->
+    <img
+      style="border-radius: 50px"
+      [src]="user.img"
+      alt="User image"
+      width="55"
+      height="55"
+      class="bg-danger"
+    />
+
+    <div style="margin-left: 0.5rem">
+      <span>
+        {{ user.username }}
+      </span>
+      <h6 class="m-0">
+        <!-- Role -->
+        <span
+          class="badge w-100 bg-primary"
+          >{{user.email}}
+        </span>
+      </h6>
+    </div>
+  </div>
+  <div *ngIf="!user">
+    <div
+    class="
+      navbar-brand
+      p-0
+      mr-0
+      d-flex
+      justify-content-center
+      align-items-center
+      animate__animated animate__fadeIn
+    "
+  >
+    <!-- Implementar custom pipe cuando no haya foto (pipe image) -->
+    <img
+      style="border-radius: 50px"
+      src="../../../assets/img/icons/alkemyLogo.png"
+      alt="User image"
+      width="55"
+      height="55"
+      class="bg-danger"
+    />
+    <div style="margin-left: 0.5rem">
+      <span>Blog<b style="color: aqua;">App</b></span>
+    </div>
+  </div>
+  </div>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse ml-4" id="navbarColor02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"  *ngIf="!setUser" >
+        <li class="nav-item">
+          <a class="nav-link  fs-6" style="cursor: pointer;"  (click)="go('')" routerLinkActive="active"  >Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fs-6" style="cursor: pointer;"  (click)="go('album')" routerLinkActive="active" >Album</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fs-6"  style="cursor: pointer;" (click)="go('user')" routerLinkActive="active">Usuarios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fs-6" style="cursor: pointer;" (click)="go('post')" routerLinkActive="active">Post</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fs-6" style="cursor: pointer;" (click)="go('todos')" routerLinkActive="active">Todos</a>
+        </li>
+      </ul>
+
+
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"  *ngIf="setUser" >
+        <li class="nav-item">
+          <a class="nav-link  fs-6" style="cursor: pointer;"  (click)="go('')" routerLinkActive="active" >Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fs-6" style="cursor: pointer;"  (click)="goUser('album')" routerLinkActive="active" >Mis Albumes</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link fs-6" style="cursor: pointer;" (click)="goUser('post')" routerLinkActive="active">Mis Post</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fs-6" style="cursor: pointer;" (click)="goUser('todos')" routerLinkActive="active"> Mis Todos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fs-6"  style="cursor: pointer;" (click)="goUser('cambiar')" routerLinkActive="active">Cambiar Usuario</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
